@@ -165,34 +165,42 @@ df = pandas.read_csv()
 
 Quel est le type de l'objet `df`?
 ```
-
+C'est un tableau à 2 dimensions => pandas.core.frame.DataFrame
 ```
 
 ##### Descriptions d'une table de données
 Que permettent les méthodes suivantes?
 ###### df.shape
 ```
+Donne les dimensions du tableau
 ```
 ###### df.head()
 ```
+Renvoie les n première ligne (5 par défaut)
 ```
 ###### df.tail()
 ```
+Renvoie les n dernière ligne (5 par défaut)
 ```
 ###### df.columns
 ```
+Renvoie le nom des colonnes du tableau
 ```
 ###### df.dtypes
 ```
+Renvoie le type pour chaque colonnes du tableau
 ```
-###### df.info
+###### df.info()
 ```
+Renvoie un résumé du tableau
 ```
 ###### df.describe()
 ```
+Renvoie un résumé d'indicateurs statistiques pour les colonnes numérique du tableaux
 ```
 ###### df.dropna()
 ```
+Supprime des éléments comportant des valeurs manquantes (toute une ligne par défaut)
 ```
 
 ##### Accès aux éléments d'une table de données
@@ -212,17 +220,17 @@ On peut accéder aux valeurs du DataFrame via des indices ou plages d'indice. La
 Il y a différentes manières de le faire, l'utilisation de `.iloc[slice_ligne,slice_colonne]` constitue une des solutions les plus simples. N'oublions pas que shape permet d'obtenir les dimensions (lignes et colonnes) du DataFrame.
 ###### Acceder aux cinq premières lignes de toutes les colonnes
 ```python
-
+df[0:5]
 ```
 
 ###### Acceder à toutes les lignes de la dernière colonne
 ```python
-
+df.iloc[:,-1:]
 ```
 
 ###### Acceder aux cinq premières lignes des colonnes 0, 2 et 3
 ```python
-
+df.iloc[0:5,[0, 2, 3]]
 ```
 
 ##### Conversion de type
@@ -272,8 +280,8 @@ df.loc[ df['Gene Symbol'].isin(['fadR', 'arcA'] ) ]
 
 ##### 3. A partir de cette échantillon de ratio d'abondance,  estimez la moyenne <img src="https://render.githubusercontent.com/render/math?math=\mu"> et l'ecart-type <img src="https://render.githubusercontent.com/render/math?math=\sigma"> d'une loi normale.
 ```
-
-
+np.mean(log2) => -0.64
+np.std(log2) => 0.47
 ```
 
 ##### 4. Superposez la densité de probabilité de cette loi sur l'histogramme. Attention, la densité de probabilité devra être mis à l'echelle de l'histogramme (cf ci-dessous)
@@ -289,13 +297,13 @@ scale = len(_)*dx # scale accordingly
 ax.plot(x, norm.pdf(x, mu, sigma)*scale) # compute theoritical PDF and draw it
 ```
 
-![Histogramme à inserez ici](histogram_log2FC.png "Title")
+![alt text](figure_log2.png)
 
 ##### 5. Quelles remarques peut-on faire à l'observation de l'histogramme et de la loi théorique?
 
 ```
-
-
+Il ne colle pas vraiment à la distribution décalée sur la gauche
+Il faudrait plutôt modéliser selon une loi log-normale
 ```
 
 #### Construction d'un volcano plot
@@ -308,7 +316,7 @@ Sont condidérées comme surabondantes les proteines remplissant ces deux critè
 * <img src="https://render.githubusercontent.com/render/math?math=\text{Log}_2(\text{abundance ratio})\gt\mu%2B\sigma">  
 * <img src="https://render.githubusercontent.com/render/math?math=\text{p-value}<0.001">
 
-![Volcano plot + quadrant à inserez ici](histogram_log2FC.png "Title")
+![Volcano plot + quadrant à inserez ici](figure_volc.png "Title")
 
 ### Analyse Fonctionelle de pathway
 
